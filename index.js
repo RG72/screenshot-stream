@@ -52,9 +52,11 @@ module.exports = (url, size, opts) => {
 	const stream = base64Stream.decode();
 
 	process.stderr.setMaxListeners(0);
-
+	
+	stream.phantom=cp;
 	cp.stderr.setEncoding('utf8');
 	cp.stdout.pipe(stream);
+	
 
 	byline(cp.stderr).on('data', data => {
 		data = data.trim();
